@@ -15,6 +15,7 @@ import { Search } from "lucide-react";
 import VillageManagement from "./VillageManagement";
 import CitizenRegistry from "./CitizenRegistry";
 import CitizenTable from "./CitizenTable";
+import { useNavigate } from "react-router-dom";
 
 interface Village {
   id: number;
@@ -42,6 +43,7 @@ interface Citizen {
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [editingCitizen, setEditingCitizen] = useState<Citizen | null>(null);
   const [selectedVillage, setSelectedVillage] = useState<string | null>(null);
@@ -280,6 +282,12 @@ const Home = () => {
       console.error("Error deleting citizen:", error);
     }
   };
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("adminId");
+    localStorage.removeItem("adminUsername");
+    navigate("/");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -288,7 +296,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <h1 className="text-2xl font-bold text-gray-900">
-              Santhapuram Panchayat Database Management System
+              Santhapuram Citizen Record Management System
             </h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-500">
@@ -296,12 +304,7 @@ const Home = () => {
               </span>
               <Button
                 variant="outline"
-                onClick={() => {
-                  localStorage.removeItem("isAuthenticated");
-                  localStorage.removeItem("adminId");
-                  localStorage.removeItem("adminUsername");
-                  window.location.href = "/login";
-                }}
+                onClick={handleLogout}
               >
                 Logout
               </Button>
@@ -441,7 +444,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-lg font-semibold mb-4">
-                Panchayat Management System
+                Panchayat Citizen Record Management System
               </h3>
               <p className="text-gray-300">
                 A comprehensive solution for managing citizen data
