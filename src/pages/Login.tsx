@@ -33,7 +33,7 @@ const Login = () => {
     // Check if user is already authenticated
     const isAuthenticated = localStorage.getItem("isAuthenticated");
     if (isAuthenticated === "true") {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [navigate]);
 
@@ -70,7 +70,7 @@ const Login = () => {
       localStorage.setItem("adminId", data.id.toString());
       localStorage.setItem("adminUsername", data.username);
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError("An error occurred during login");
       setIsLoading(false);
