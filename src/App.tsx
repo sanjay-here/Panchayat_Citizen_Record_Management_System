@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/home";
 import Login from "./pages/Login";
+import Landing from "./pages/Landing";
 import routes from "tempo-routes";
 
 // Auth guard component
@@ -29,9 +30,10 @@ function App() {
     <Suspense fallback={<p>Loading...</p>}>
       <>
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route
-            path="/"
+            path="/dashboard"
             element={
               <ProtectedRoute>
                 <Home />
